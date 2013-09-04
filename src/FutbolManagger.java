@@ -23,10 +23,10 @@ public class FutbolManagger extends javax.swing.JFrame {
     DefaultListModel listModelPartidas = new DefaultListModel();
     DefaultListModel listModelTit = new DefaultListModel();
     DefaultListModel listModelSup = new DefaultListModel();
-    String equipselec = "";
-    String presupuesto = "";
-    String sueldo = "";
-    String[] titulares = new String[11];
+    String equipselec = "";//variable del equipo seleccionado
+    String presupuesto = "";//variable del presupuesto de transferencias
+    String sueldo = "";//variable del sueldo
+    String[] titulares = new String[11];//array contenedor de los jugadores titulares
 
     /**
      * Creates new form FutbolManagger
@@ -34,8 +34,8 @@ public class FutbolManagger extends javax.swing.JFrame {
     public FutbolManagger() {
         initComponents();
         setLocationRelativeTo(null);
-        lstAlineacionTit.setModel(listModelTit);
-        lstAlineacionSup.setModel(listModelSup);
+        lstAlineacionTit.setModel(listModelTit);//lista de jugadores titulares
+        lstAlineacionSup.setModel(listModelSup);//lista de jugadores suplentes
     }
 
     /**
@@ -767,7 +767,7 @@ public class FutbolManagger extends javax.swing.JFrame {
         frmNuevo.setLocationRelativeTo(null);
         frmJugar.hide();
         CrearArchivo e = new CrearArchivo();
-        e.nuevoarchivoindividual("Partidos jugados", "0");
+        e.nuevoarchivoindividual("Partidos jugados", "0");//al comenzar una nueva partida los partidos jugados son 0
     }//GEN-LAST:event_btnNuevapartActionPerformed
 
     private void btnCargarpartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarpartActionPerformed
@@ -789,33 +789,33 @@ public class FutbolManagger extends javax.swing.JFrame {
 
     private void btnAllBoysActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllBoysActionPerformed
         // TODO add your handling code here:
-        listModelSup.clear();
+        listModelSup.clear();//limpiamos la lista de los jugadores suplentes
         listModelSup.addElement("            Suuplentes");
         listModelSup.addElement("****************************************");
-        listModelTit.clear();
+        listModelTit.clear();//limpiamos la lista de los jugadores titulares
         listModelTit.addElement("            Titulares");
         listModelTit.addElement("****************************************");
-        lblEquiposelec.setText("All Boys");
+        lblEquiposelec.setText("All Boys");//determinamos el equipo seleccionado
         equipselec = lblEquiposelec.getText();
         LeerArchivo a = new LeerArchivo();
-        presupuesto = a.leerstring("All Boys Presupuesto.txt");
+        presupuesto = a.leerstring("All Boys Presupuesto.txt");//el presupuesto es determinado para cada equipo guardado en un txt para cada uno de ellos
         lblPresupuesto.setText("$" + presupuesto);
-        sueldo = a.leerstring("All Boys Sueldo.txt");
+        sueldo = a.leerstring("All Boys Sueldo.txt");//el sueldo es guardado igual que el presupuesto
         lblSueldo.setText("$"+sueldo);
         String jugadoresclave = a.leerstring("All Boys Jugadores clave.txt");
-        lblJugadoresclave.setText(jugadoresclave);
+        lblJugadoresclave.setText(jugadoresclave);//se dan como datos los jugadores clave de cada equipo
         String dificultad = a.leerstring("All Boys Dificultad.txt");
-        lblDificultad.setText(dificultad);
+        lblDificultad.setText(dificultad);//dependiendo de que equipo es variara la dificultad
         String objetivo = a.leerstring("All Boys Objetivo.txt");
-        lblObjetivo.setText(objetivo);
+        lblObjetivo.setText(objetivo);//el objetivo es distinto para cada equipo dependiendo de sus caracteristicas
         titulares = a.leerarray("All Boys Titulares.txt");
         for (int i = 0; i < 11; i++) {
-            listModelTit.addElement(titulares[i]);
+            listModelTit.addElement(titulares[i]);//almacenamos los jugadores titulares en una lista
         }
         String[] suplentes = a.leerarray("All Boys Suplentes.txt");
         for (int e = 0; e < 8; e++){
             String suplente = suplentes[e];
-            listModelSup.addElement(suplente);
+            listModelSup.addElement(suplente);//almacenamos los jugadores suplentes en una lista
         }
         
     }//GEN-LAST:event_btnAllBoysActionPerformed

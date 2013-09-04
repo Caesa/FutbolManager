@@ -15,21 +15,20 @@ import javax.swing.DefaultListModel;
  */
 public class MenuJuego extends javax.swing.JFrame {
 
-    DefaultListModel listModelTit = new DefaultListModel();
-    DefaultListModel listModelEquipos = new DefaultListModel();
-    DefaultListModel listModelPuntos = new DefaultListModel();
-    DefaultListModel listModelSup = new DefaultListModel();
+    DefaultListModel listModelTit = new DefaultListModel();//lista para los titulares
+    DefaultListModel listModelEquipos = new DefaultListModel();//lista para los equipos en la tabla de posiciones
+    DefaultListModel listModelPuntos = new DefaultListModel();//lista para los puntos en la tabla de posiciones
+    DefaultListModel listModelSup = new DefaultListModel();//lista para los suplentes
     String[] titulares = new String[11];
     String[] suplentes = new String[7];
-    String formacselec = "4-4-2";
+    String formacselec = "4-4-2";//variable para la formacion seleccionada
     int equiposelec = 0;
-    String[] todoslosequipos = new String[20];
-    String[] contrincantes = new String[19];
+    String[] todoslosequipos = new String[20];//array contenedor de todos los equipos
+    String[] contrincantes = new String[19];//array contenedor de los contrincantes
     LeerArchivo a = new LeerArchivo();
     CrearArchivo s = new CrearArchivo();
-    String miequipo = a.leerstring("Equipo del DT.txt");
-//    String partidosjugados = a.leerstring("Partidos jugados.txt");
-    int pjugados = 18;
+    String miequipo = a.leerstring("Equipo del DT.txt");//variable para mi equipo
+    int pjugados = 0;
     String equipocontrario = contrincantes[pjugados];
     int cr = 0;
     int min = 0;
@@ -42,7 +41,7 @@ public class MenuJuego extends javax.swing.JFrame {
     int misgoles = 0;
     int susgoles = 0;
     int[] puntos = new int[20];
-    int jugadorseleccionado = 0;
+    int jugadorseleccionado = 0;//variable para saber que jugador deseo cambiar
 
     /**
      * Creates new form MenuJuego
@@ -50,7 +49,7 @@ public class MenuJuego extends javax.swing.JFrame {
     public MenuJuego() {
         initComponents();
         setLocationRelativeTo(null);
-        for (int i = 0; i < puntos.length; i++) {
+        for (int i = 0; i < puntos.length; i++) {//seteo los equipos y  los puntos en la tabla de posiciones
             System.out.println(puntos[i]);
             listModelEquipos.addElement(todoslosequipos[i]);
             listModelPuntos.addElement(puntos[i]);
@@ -316,7 +315,7 @@ public class MenuJuego extends javax.swing.JFrame {
      * 
      */
 
-    private void startTimer() {
+    private void startTimer() {//cronometro del partido
         min = 0;
         seg = 0;
         dec = 0;
@@ -354,7 +353,7 @@ public class MenuJuego extends javax.swing.JFrame {
      /*
      * Se habilita cada 1 segundo.
      */
-    private void runTask() {
+    private void runTask() {//cronometro del partido en donde se determinan cuando se convertiran los goles dependiendo de la cantidad
 
         if (cr == 0) {
             if (susgoles == 1) {
@@ -1928,7 +1927,7 @@ public class MenuJuego extends javax.swing.JFrame {
 
     private void btnAlineacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlineacionActionPerformed
         // TODO add your handling code here:
-        if (formacselec.equals("4-4-2")) {
+        if (formacselec.equals("4-4-2")) {//ventana para modificar la alineacion en el caso que la formacion sea 442
             frmAlineacion442.setVisible(true);
             frmAlineacion442.setSize(653, 430);
             frmAlineacion442.setLocationRelativeTo(null);
@@ -1962,7 +1961,7 @@ public class MenuJuego extends javax.swing.JFrame {
 
         }
 
-        if (formacselec.equals("3-4-3")) {
+        if (formacselec.equals("3-4-3")) {//ventana para modificar la alineacion en caso de que la formacion sea 343
             frmAlineacion343.setVisible(true);
             frmAlineacion343.setSize(653, 430);
             frmAlineacion343.setLocationRelativeTo(null);
@@ -2012,7 +2011,7 @@ public class MenuJuego extends javax.swing.JFrame {
 
     private void cmbxFormacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbxFormacionesActionPerformed
         // TODO add your handling code here:
-        formacselec = "" + cmbxFormaciones.getSelectedItem();
+        formacselec = "" + cmbxFormaciones.getSelectedItem();//dependiendo de la formacion seleccionada cambia la imagen
         if (formacselec.equals("4-4-2")) {
             lblImagenForm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/4-4-2.jpg")));
         }
@@ -2032,7 +2031,7 @@ public class MenuJuego extends javax.swing.JFrame {
 
         if (formacselec.equals("3-4-3")) {
             lblImAlineacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/3-4-3.jpg")));
-            lblFormacion.setText(formacselec);
+            lblFormacion.setText(formacselec);//al modificar de 442 a 343 se saca a un defensor y se ingresa a un delantero
             String auxiliar = suplentes[6];
             suplentes[6] = suplentes[5];
             suplentes[5] = suplentes[4];
@@ -2075,17 +2074,17 @@ public class MenuJuego extends javax.swing.JFrame {
         for (int i = 0; i < contrincantes.length; i++) {
             System.out.println(contrincantes[i]);
         }
-        lblContrincanteNombre.setText(contrincantes[pjugados]);
+        lblContrincanteNombre.setText(contrincantes[pjugados]);//el contrincante dependera de los partidos jugados
         lblMiMarcador.setText("0");
         lblSuMarcador.setText("0");
-        misgoles = (int) (Math.random() * 4 + 1);
+        misgoles = (int) (Math.random() * 4 + 1);//random para los goles hasta 4
         susgoles = (int) (Math.random() * 4 + 1);
     }//GEN-LAST:event_btnPPartidoActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         // TODO add your handling code here:
         pjugados++;
-        if (pjugados == 19) {
+        if (pjugados == 19) {//se determina el final del torneo
             frmJuego.hide();
             frmFinal.setVisible(true);
             frmFinal.setSize(485, 210);
@@ -2096,7 +2095,7 @@ public class MenuJuego extends javax.swing.JFrame {
             listModelEquipos.removeAllElements();
             listModelPuntos.removeAllElements();
             frmJuego.hide();
-            for (int i = 0; i < todoslosequipos.length; i++) {
+            for (int i = 0; i < todoslosequipos.length; i++) {//se hace un random para cada equipo para que pueda sumar puntos en la tabla
                 if (!todoslosequipos[i].equals(miequipo)) {
                     if (!todoslosequipos[i].equals(lblContrincanteNombre.getText())) {
                         int rnd = (int) (Math.random() * 3 + 1);
@@ -2134,7 +2133,7 @@ public class MenuJuego extends javax.swing.JFrame {
                     }
                 }
             }
-            for (int i = 0; i < puntos.length; i++) {
+            for (int i = 0; i < puntos.length; i++) {//se acomodan los equipos y los puntos en la tabla
                 for (int e = 1; e < puntos.length; e++) {
                     if (puntos[i] > puntos[e]) {
                         int auxpuntos = puntos[i];
